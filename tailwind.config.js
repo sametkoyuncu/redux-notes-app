@@ -6,7 +6,5 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  purge: [
-    './public/**/*.html'
-  ],
+  purge: ['./public/*.html'],
 }
