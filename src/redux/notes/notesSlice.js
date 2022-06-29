@@ -1,64 +1,20 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
 
+import {
+  writeNotesToLocalStorage,
+  readNotesFromLocalStorage,
+} from '../../functions/localStorage'
+
 export const notesSlice = createSlice({
   name: 'notes',
   initialState: {
-    items: [
-      {
-        id: nanoid(),
-        title: 'Add LocalStorage',
-        content:
-          'Add localStorage to store notes in browser. Add notes to localStorage when note is added or removed.',
-        bgColor: 'bg-purple-300',
-      },
-      {
-        id: nanoid(),
-        title: 'Mobil Tasarımı Düzenle',
-        content:
-          'lorem ipsum dolor sit amet. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir.',
-        bgColor: 'bg-pink-300',
-      },
-      {
-        id: nanoid(),
-        title: 'Swift Öğren',
-        content:
-          'lorem ipsum dolor sit amet. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. lorem ipsum dolor sit amet. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. lorem ipsum dolor sit amet. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir.',
-        bgColor: 'bg-green-300',
-      },
-      {
-        id: nanoid(),
-        title: 'Statedeki bgColor Düzeltilse İyi Olur',
-        content:
-          'lorem ipsum dolor sit amet. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. lorem ipsum dolor sit amet. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. lorem ipsum dolor sit amet. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir. Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik kesilerek sunulur. Görsel bütünlük açısından güzel olabilir.',
-        bgColor: 'bg-yellow-300',
-      },
-      {
-        id: nanoid(),
-        title: 'Detay Modalını Düzenle',
-        content:
-          "Detay modal'ında buttonlar çalışmıyor veya eksik çalışıyor. Bunları düzelt",
-        bgColor: 'bg-green-300',
-      },
-      {
-        id: nanoid(),
-        title: 'Content Uzunluğu',
-        content:
-          'Eğer content karater sınırından kısaysa devamını oku kısmı gözükmesin.',
-        bgColor: 'bg-blue-300',
-      },
-      {
-        id: nanoid(),
-        title: 'Detay Modal Tasarım',
-        content:
-          'Modal başlık rengi beyaz veya açık gri olsa daha iyi olur gibi. veya koyu arkaplan beyaz yazı rengi.',
-        bgColor: 'bg-orange-300',
-      },
-    ],
+    items: [...readNotesFromLocalStorage()],
   },
   reducers: {
     addNote: {
       reducer: (state, action) => {
         state.items.push(action.payload)
+        writeNotesToLocalStorage(state.items)
       },
       prepare: ({ title, content, bgColor }) => {
         return {
@@ -74,6 +30,7 @@ export const notesSlice = createSlice({
     deleteNote: {
       reducer: (state, action) => {
         state.items = state.items.filter((item) => item.id !== action.payload)
+        writeNotesToLocalStorage(state.items)
       },
     },
     editNote: {
@@ -87,6 +44,7 @@ export const notesSlice = createSlice({
           }
           return item
         })
+        writeNotesToLocalStorage(state.items)
       },
     },
   },
