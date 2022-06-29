@@ -1,22 +1,6 @@
 import { useState } from 'react'
-import Pencil from '../icons/Pencil'
-import Trash from '../icons/Trash'
 
-const Buttons = () => {
-  const buttonClasses =
-    'inline-block rounded-lg hover:bg-gray-200 hover:bg-opacity-30 hover:shadow-md active:shadow-none transition duration-300 ease-in-out w-9 h-9'
-  return (
-    <>
-      {' '}
-      <button type="button" className={`${buttonClasses} mr-2`}>
-        <Pencil />
-      </button>
-      <button type="button" className={buttonClasses}>
-        <Trash />
-      </button>
-    </>
-  )
-}
+import Buttons from './Buttons'
 
 const Note = ({ note }) => {
   const [showModal, setShowModal] = useState(false)
@@ -47,7 +31,7 @@ const Note = ({ note }) => {
           </p>
         </div>
         <div className="flex flex-row justify-end">
-          <Buttons />
+          <Buttons id={id} />
         </div>
       </div>
       {showModal ? (
