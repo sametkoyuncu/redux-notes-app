@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import Form from './Form'
+import AddNoteForm from '../Forms/AddNoteForm'
 
-const Modal = () => {
+const AddNoteModal = () => {
   const [showModal, setShowModal] = useState(false)
 
   const handleOpen = () => {
@@ -41,7 +41,7 @@ const Modal = () => {
                 </div>
                 {/*body*/}
                 <div className="relative flex-auto">
-                  <Form setShowModal={setShowModal} />
+                  <AddNoteForm setShowModal={setShowModal} />
                 </div>
               </div>
             </div>
@@ -53,4 +53,4 @@ const Modal = () => {
   )
 }
 
-export default Modal
+export default AddNoteModal

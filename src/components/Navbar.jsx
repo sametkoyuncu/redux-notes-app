@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from './Modal'
+import AddNoteModal from './Modals/AddNoteModal'
 import Search from './Search'
 
 const Navbar = () => {
@@ -12,7 +12,7 @@ const Navbar = () => {
         <Search />
       </div>
       <div>
-        <Modal />
+        <AddNoteModal />
       </div>
     </div>
   )
