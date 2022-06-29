@@ -18,7 +18,7 @@ const Note = ({ note }) => {
     <>
       <div
         className={`flex flex-col justify-between p-6 pb-5 rounded-lg shadow-lg ${
-          bgColor || 'bg-white'
+          'bg-' + bgColor + '-300' || 'bg-white'
         } max-w-sm h-60`}
       >
         <div className="cursor-pointer" onClick={handleOpen}>
@@ -26,8 +26,13 @@ const Note = ({ note }) => {
             {title}
           </h5>
           <p className="text-gray-700 text-base mb-4">
-            {content.slice(0, 140).trim()}...&nbsp;
-            <span className="text-gray-500">(devamını oku 👆)</span>
+            {content.slice(0, 140).trim()}
+            {content.length > 140 && (
+              <>
+                ...&nbsp;
+                <span className="text-gray-500">(devamını oku 👆)</span>
+              </>
+            )}
           </p>
         </div>
         <div className="flex flex-row justify-end">
@@ -41,19 +46,19 @@ const Note = ({ note }) => {
               {/*content*/}
               <div
                 className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full ${
-                  bgColor || 'bg-white'
+                  'bg-' + bgColor + '-300' || 'bg-white'
                 } outline-none focus:outline-none`}
               >
                 {/*header*/}
-                <div className="flex items-start justify-between py-4 px-6 border-b border-solid border-gray-400 rounded-t">
-                  <h5 className="text-gray-900 text-xl leading-tight font-medium mt-1">
+                <div className="flex items-start justify-between py-4 px-6  bg-slate-600 rounded-t shadow-sm">
+                  <h5 className="text-white text-xl leading-tight font-medium mt-1">
                     {title}
                   </h5>
                   <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
+                    className="p-1 ml-auto bg-transparent rounded-full border-0 text-black float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={handleClose}
                   >
-                    <span className="bg-transparent text-red-700 h-6 w-6 opacity-60 block outline-none focus:outline-none">
+                    <span className="bg-transparent text-yellow-400 h-6 w-6 block outline-none focus:outline-none">
                       ×
                     </span>
                   </button>
@@ -62,7 +67,7 @@ const Note = ({ note }) => {
                 <div className="relative flex-auto p-6">
                   <p className="text-gray-700 text-base mb-4">{content}</p>
                   <div className="flex flex-row justify-end">
-                    <Buttons />
+                    <Buttons id={id} />
                   </div>
                 </div>
               </div>

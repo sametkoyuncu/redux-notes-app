@@ -6,7 +6,7 @@ import { addNote } from '../../redux/notes/notesSlice'
 const INITIAL_STATE = {
   title: '',
   content: '',
-  bgColor: 'bg-pink-300',
+  bgColor: 'pink',
 }
 
 const bgColors = ['pink', 'blue', 'green', 'yellow', 'orange', 'red', 'purple']
@@ -21,14 +21,12 @@ const AddNoteForm = ({ setShowModal }) => {
     }
 
     dispatch(addNote(note))
-    console.log('note', note)
     setNote(null)
     setShowModal(false)
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    console.log('name', name, 'value', value)
     setNote((prev) => ({ ...prev, [name]: value }))
   }
 
@@ -91,11 +89,11 @@ const AddNoteForm = ({ setShowModal }) => {
             {bgColors.map((bgColor) => (
               <div key={bgColor} className="form-check">
                 <input
-                  className={`form-check-input appearance-none rounded-full h-6 w-6 border border-gray-300 bg-${bgColor}-300 checked:border-4 checked:bg-${bgColor}-400 checked:border-${bgColor}-600 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer`}
+                  className={`form-check-input appearance-none rounded-full h-6 w-6 border border-gray-600 bg-${bgColor}-300 checked:border-4 checked:bg-${bgColor}-400 checked:border-${bgColor}-600 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer`}
                   type="radio"
                   name="bgColor"
-                  value={`bg-${bgColor}-300`}
-                  checked={note.bgColor === `bg-${bgColor}-300`}
+                  value={bgColor}
+                  checked={note.bgColor === bgColor}
                   onChange={handleChange}
                 />
               </div>
