@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import Form from './Form'
 
 const Modal = () => {
@@ -40,7 +41,7 @@ const Modal = () => {
                 </div>
                 {/*body*/}
                 <div className="relative flex-auto">
-                  <Form />
+                  <Form setShowModal={setShowModal} />
                 </div>
               </div>
             </div>

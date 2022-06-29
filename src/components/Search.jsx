@@ -4,7 +4,7 @@ const Search = () => {
   return (
     <input
       type="text"
-      class="
+      className="
         form-control
         w-72
         px-4

@@ -3,27 +3,25 @@ import Pencil from '../icons/Pencil'
 import Trash from '../icons/Trash'
 
 const Buttons = () => {
+  const buttonClasses =
+    'inline-block rounded-lg hover:bg-gray-200 hover:bg-opacity-30 hover:shadow-md active:shadow-none transition duration-300 ease-in-out w-9 h-9'
   return (
     <>
       {' '}
-      <button
-        type="button"
-        className="inline-block rounded-lg hover:bg-gray-200 hover:shadow-md active:shadow-none transition duration-300 ease-in-out w-9 h-9 mr-2"
-      >
+      <button type="button" className={`${buttonClasses} mr-2`}>
         <Pencil />
       </button>
-      <button
-        type="button"
-        className="inline-block rounded-lg hover:bg-gray-200 hover:shadow-md active:shadow-none transition duration-300 ease-in-out w-9 h-9"
-      >
+      <button type="button" className={buttonClasses}>
         <Trash />
       </button>
     </>
   )
 }
 
-const Note = ({ bgColor }) => {
+const Note = ({ note }) => {
   const [showModal, setShowModal] = useState(false)
+
+  const { id, title, content, bgColor } = note
 
   const handleOpen = () => {
     setShowModal(true)
@@ -35,17 +33,17 @@ const Note = ({ bgColor }) => {
   return (
     <>
       <div
-        className={`block p-6 pb-5 rounded-lg shadow-lg ${
+        className={`flex flex-col justify-between p-6 pb-5 rounded-lg shadow-lg ${
           bgColor || 'bg-white'
-        } max-w-sm`}
+        } max-w-sm h-60`}
       >
         <div className="cursor-pointer" onClick={handleOpen}>
           <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">
-            Yapılacaklar
+            {title}
           </h5>
           <p className="text-gray-700 text-base mb-4">
-            Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik
-            kesilerek sunulur. Görsel bütünlük açısından güzel olabilir.
+            {content.slice(0, 140).trim()}...&nbsp;
+            <span className="text-gray-500">(devamını oku 👆)</span>
           </p>
         </div>
         <div className="flex flex-row justify-end">
@@ -54,8 +52,8 @@ const Note = ({ bgColor }) => {
       </div>
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+          <div className="justify-center items-start mt-16 flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-xl">
               {/*content*/}
               <div
                 className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full ${
@@ -65,7 +63,7 @@ const Note = ({ bgColor }) => {
                 {/*header*/}
                 <div className="flex items-start justify-between py-4 px-6 border-b border-solid border-gray-400 rounded-t">
                   <h5 className="text-gray-900 text-xl leading-tight font-medium mt-1">
-                    Yapılacaklar
+                    {title}
                   </h5>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
@@ -78,10 +76,7 @@ const Note = ({ bgColor }) => {
                 </div>
                 {/*body*/}
                 <div className="relative flex-auto p-6">
-                  <p className="text-gray-700 text-base mb-4">
-                    Nota tıklanınca modalda açılabilir. Önizleme kısmında içerik
-                    kesilerek sunulur. Görsel bütünlük açısından güzel olabilir.
-                  </p>
+                  <p className="text-gray-700 text-base mb-4">{content}</p>
                   <div className="flex flex-row justify-end">
                     <Buttons />
                   </div>
