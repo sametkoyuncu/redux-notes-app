@@ -15,6 +15,7 @@ export const notesSlice = createSlice({
       reducer: (state, action) => {
         state.items.push(action.payload)
         writeNotesToLocalStorage(state.items)
+        return state
       },
       prepare: ({ title, content, bgColor }) => {
         return {
