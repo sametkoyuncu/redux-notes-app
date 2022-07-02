@@ -1,24 +1,50 @@
-import Footer from './components/Footer'
-import Navbar from './components/Navbar'
-import Notes from './components/Notes'
+//mui
+import Box from '@mui/material/Box'
+
+// notesapp components
+import Navbar from './components/Navbar/Navbar'
+import Notes from './components/Notes/Notes'
 
 function App() {
   return (
-    <>
-      <div className="flex flex-col justify-between min-h-screen">
-        <div className="flex flex-row justify-center items-center mb-10">
-          <div className="flex flex-col gap-4 items-center">
-            <div>
-              <Navbar />
-            </div>
-            <div className="mt-40 sm:mt-20">
-              <Notes />
-            </div>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    </>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        minHeight: '95vh',
+      }}
+    >
+      <Box>
+        <Navbar />
+        <Notes />
+      </Box>
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'items',
+        }}
+      >
+        <a
+          href="https://github.com/sametkoyuncu"
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            fontFamily: 'Roboto',
+            textDecoration: 'none',
+            color: '#1f2937',
+            fontSize: '1.2rem',
+            fontWeight: 'bold',
+            textAlign: 'center',
+          }}
+        >
+          Samet Koyuncu
+        </a>
+      </Box>
+    </Box>
   )
 }
 

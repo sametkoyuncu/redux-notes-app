@@ -1,56 +1,76 @@
 import { useState } from 'react'
 
+// mui
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Backdrop from '@mui/material/Backdrop'
+import Modal from '@mui/material/Modal'
+import Fade from '@mui/material/Fade'
+import Typography from '@mui/material/Typography'
+
+// noteapp components
 import AddNoteForm from '../Forms/AddNoteForm'
 
-const AddNoteModal = () => {
-  const [showModal, setShowModal] = useState(false)
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: { xs: '80%', sm: 400 },
+  bgcolor: 'background.paper',
+  border: '1px solid #e4e4e4',
+  borderRadius: 3,
+  boxShadow: 24,
+  p: 4,
+  pb: 2,
+}
 
-  const handleOpen = () => {
-    setShowModal(true)
-  }
-  const handleClose = () => {
-    setShowModal(false)
-  }
+const btnShadow =
+  'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset'
+
+export default function TransitionsModal() {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   return (
-    <>
-      <button
-        className="inline-block px-6 py-2.5 bg-green-400 text-white font-medium text-xs leading-tight uppercase rounded-lg shadow-md hover:bg-green-500 hover:shadow-lg focus:bg-green-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-600 active:shadow-lg transition duration-150 ease-in-out"
-        type="button"
+    <div>
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: '#22c55e',
+          borderRadius: 20,
+          boxShadow: btnShadow,
+          '&:hover': {
+            backgroundColor: '#16a34a',
+            boxShadow: 'none',
+          },
+        }}
+        disableElevation
         onClick={handleOpen}
       >
         Add
-      </button>
-      {showModal ? (
-        <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-2xl font-semibold">New Note</h3>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={handleClose}
-                  >
-                    <span className="bg-transparent text-red-700 h-6 w-6 opacity-60 block outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button>
-                </div>
-                {/*body*/}
-                <div className="relative flex-auto">
-                  <AddNoteForm setShowModal={setShowModal} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
-      ) : null}
-    </>
+      </Button>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={{ ...style }}>
+            <Typography id="transition-modal-title" variant="h4" component="h2">
+              Add new note
+            </Typography>
+            <AddNoteForm setShowModal={setOpen} btnShadow={btnShadow} />
+          </Box>
+        </Fade>
+      </Modal>
+    </div>
   )
 }
-
-export default AddNoteModal
