@@ -21,8 +21,10 @@ const Notes = () => {
         return note.title.toLowerCase().includes(search)
       })
       setFilteredNotes([..._notes])
+    } else {
+      setFilteredNotes([...notes])
     }
-  }, [search])
+  }, [search, notes])
 
   return (
     <Container maxWidth="lg" sx={{ mt: 3 }}>

@@ -23,6 +23,7 @@ const Buttons = ({ id }) => {
 
   const handleOk = () => {
     dispatch(deleteNote(id))
+    setOpen(false)
   }
 
   const handleDelete = () => {
