@@ -9,6 +9,7 @@ export const notesSlice = createSlice({
   name: 'notes',
   initialState: {
     items: [...readNotesFromLocalStorage()],
+    search: '',
   },
   reducers: {
     addNote: {
@@ -48,11 +49,18 @@ export const notesSlice = createSlice({
         writeNotesToLocalStorage(state.items)
       },
     },
+    setSearch: {
+      reducer: (state, action) => {
+        state.search = action.payload
+      },
+    },
   },
 })
 export const selectNotes = (state) => state.notes.items
+export const selectSearch = (state) => state.notes.search
 // FIXME: its not working
 export const selectNoteById = (state, id) =>
   state.notes.items.find((item) => item.id === id)
-export const { addNote, deleteNote, editNote, getNote } = notesSlice.actions
+export const { addNote, deleteNote, editNote, getNote, setSearch } =
+  notesSlice.actions
 export default notesSlice.reducer
