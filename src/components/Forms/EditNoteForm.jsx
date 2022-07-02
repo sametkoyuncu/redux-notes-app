@@ -11,10 +11,15 @@ import TextField from '@mui/material/TextField'
 import Radio from '@mui/material/Radio'
 import Typography from '@mui/material/Typography'
 
-const INITIAL_STATE = {
+const INITIAL_NOTE_STATE = {
   title: '',
   content: '',
   bgColor: 'red',
+}
+
+const INITIAL_ERROR_STATE = {
+  title: { message: '', status: false },
+  content: { message: '', status: false },
 }
 
 const colors = [
@@ -29,7 +34,9 @@ const colors = [
 ]
 
 const EditNoteForm = ({ setShowModal, btnShadow, id }) => {
-  const [note, setNote] = useState(INITIAL_STATE)
+  const [note, setNote] = useState(INITIAL_NOTE_STATE)
+  const [error, setError] = useState(INITIAL_ERROR_STATE)
+
   const dispatch = useDispatch()
   const notes = useSelector(selectNotes)
 
@@ -39,18 +46,28 @@ const EditNoteForm = ({ setShowModal, btnShadow, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!note.title.trim() || !note.content.trim()) {
-      return
+
+    if (!note.title.trim()) {
+      setError({
+        ...error,
+        title: { message: 'Title is required', status: true },
+      })
+    } else if (!note.content.trim()) {
+      setError({
+        ...error,
+        content: { message: 'Content is required', status: true },
+      })
+    } else {
+      setError(INITIAL_ERROR_STATE)
+      dispatch(editNote(note))
+      setNote(INITIAL_NOTE_STATE)
+      setShowModal(false)
     }
-
-    dispatch(editNote(note))
-    setNote(INITIAL_STATE)
-    setShowModal(false)
   }
-
   const handleChange = (e) => {
     const { name, value } = e.target
     setNote((prev) => ({ ...prev, [name]: value }))
+    setError(INITIAL_ERROR_STATE)
   }
 
   const controlProps = (bgColor) => ({
@@ -63,7 +80,8 @@ const EditNoteForm = ({ setShowModal, btnShadow, id }) => {
   return (
     <form onSubmit={handleSubmit}>
       <TextField
-        id="standard-basic"
+        error={error.title.status}
+        helperText={error.title.message}
         label="Note Title"
         variant="standard"
         fullWidth
@@ -73,7 +91,8 @@ const EditNoteForm = ({ setShowModal, btnShadow, id }) => {
         onChange={handleChange}
       />
       <TextField
-        id="standard-basic"
+        error={error.content.status}
+        helperText={error.content.message}
         label="Enter your note here..."
         variant="standard"
         fullWidth

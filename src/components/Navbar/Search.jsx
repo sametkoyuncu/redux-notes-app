@@ -38,8 +38,8 @@ export default function Search() {
         onChange={(e) => dispatch(setSearch(e.target.value))}
         inputProps={{ 'aria-label': 'search notes' }}
       />
-      <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      <IconButton sx={{ p: '10px' }} aria-label="search">
+      {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" /> */}
+      <IconButton sx={{ p: '10px' }} aria-label="search" disabled>
         <SearchIcon />
       </IconButton>
     </Paper>
