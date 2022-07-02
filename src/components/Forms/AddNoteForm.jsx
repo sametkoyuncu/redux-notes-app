@@ -105,22 +105,42 @@ const AddNoteForm = ({ setShowModal, btnShadow }) => {
         sx={{ mt: 2 }}
       >
         <Typography variant="body1" style={{ color: colors[7].checked }}>
-          Select note color:
+          Selected color:{' '}
+          <span
+            style={{
+              fontWeight: 'bold',
+              color: '#111827',
+              background: `linear-gradient(to top, ${
+                colors.find((color) => color.name === note.bgColor).default
+              } 50%, transparent 50%`,
+            }}
+          >
+            {note.bgColor.charAt(0).toUpperCase() + note.bgColor.slice(1)}
+          </span>
         </Typography>
-        {colors.map((color) => (
-          <div style={{ display: 'inline-block' }}>
-            <Radio
-              key={color.name}
-              {...controlProps(color.name)}
-              sx={{
-                color: color.default,
-                '&.Mui-checked': {
-                  color: color.checked,
-                },
-              }}
-            />
-          </div>
-        ))}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+          }}
+        >
+          {colors.map((color) => (
+            <div style={{ display: 'inline' }}>
+              <Radio
+                key={color.name}
+                {...controlProps(color.name)}
+                sx={{
+                  color: color.default,
+                  '&.Mui-checked': {
+                    color: color.checked,
+                  },
+                }}
+              />
+            </div>
+          ))}
+        </Box>
       </Box>
       <Grid
         container
