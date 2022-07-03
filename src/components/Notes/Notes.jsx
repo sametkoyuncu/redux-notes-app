@@ -30,7 +30,12 @@ const Notes = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 3, mb: 3 }}>
       {/* <Grid container spacing={3}> */}
-      <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2}>
+      <Masonry
+        columns={{ xs: 1, sm: 2, md: 3 }}
+        defaultColumns={3}
+        spacing={2}
+        maxWidth="lg"
+      >
         {filteredNotes.map((note) => (
           <Grid key={note.id} item xs={12} sm={6} md={4}>
             <Note note={note} />
