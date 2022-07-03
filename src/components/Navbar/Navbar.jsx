@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Container from '@mui/material/Container'
 
 // noteapp components
-import Modal from '../Modal/Modal'
+import Modal from '../Modals/Modal'
 import Search from './Search'
 import { Typography } from '@mui/material'
 
