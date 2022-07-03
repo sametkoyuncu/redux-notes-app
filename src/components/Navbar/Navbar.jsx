@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Container from '@mui/material/Container'
 
 // noteapp components
-import AddNoteModal from '../Modals/AddNoteModal'
+import Modal from '../Modal/Modal'
 import Search from './Search'
 import { Typography } from '@mui/material'
 
@@ -36,7 +36,23 @@ const Navbar = () => {
 
           <Search />
           <Box sx={{ flexGrow: 0 }}>
-            <AddNoteModal />
+            <Modal
+              type="add"
+              button={{
+                styles: {
+                  color: '#fff',
+                  backgroundColor: '#22c55e',
+                  borderRadius: 20,
+                  boxShadow:
+                    'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset',
+                  '&:hover': {
+                    backgroundColor: '#16a34a',
+                    boxShadow: 'none',
+                  },
+                },
+                text: 'Add',
+              }}
+            />
           </Box>
         </Toolbar>
       </Container>

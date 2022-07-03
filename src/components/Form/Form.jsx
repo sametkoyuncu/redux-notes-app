@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-import { useDispatch } from 'react-redux'
-import { addNote } from '../../redux/notes/notesSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { addNote, editNote, selectNotes } from '../../redux/notes/notesSlice'
 
 // mui
 import Box from '@mui/material/Box'
@@ -33,10 +33,18 @@ const colors = [
   { name: 'gray', default: '#d1d5db', checked: '#6b7280' },
 ]
 
-const AddNoteForm = ({ setShowModal, btnShadow }) => {
+const Form = ({ type, setShowModal, btnShadow, id }) => {
   const [note, setNote] = useState(INITIAL_NOTE_STATE)
   const [error, setError] = useState(INITIAL_ERROR_STATE)
+
   const dispatch = useDispatch()
+  const notes = useSelector(selectNotes)
+
+  useEffect(() => {
+    if (type === 'edit') {
+      setNote({ ...notes.find((note) => note.id === id) })
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -52,8 +60,9 @@ const AddNoteForm = ({ setShowModal, btnShadow }) => {
         content: { message: 'Content is required', status: true },
       })
     } else {
+      type === 'add' ? dispatch(addNote(note)) : dispatch(editNote(note))
+
       setError(INITIAL_ERROR_STATE)
-      dispatch(addNote(note))
       setNote(INITIAL_NOTE_STATE)
       setShowModal(false)
     }
@@ -181,4 +190,4 @@ const AddNoteForm = ({ setShowModal, btnShadow }) => {
   )
 }
 
-export default AddNoteForm
+export default Form

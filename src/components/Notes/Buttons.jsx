@@ -8,7 +8,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogTitle from '@mui/material/DialogTitle'
 
-import EditNoteModal from '../Modals/EditNoteModal'
+import Modal from '../Modal/Modal'
 import { deleteNote } from '../../redux/notes/notesSlice'
 import Pencil from '../assets/icons/Pencil'
 import Trash from '../assets/icons/Trash'
@@ -36,20 +36,25 @@ const Buttons = ({ id }) => {
     border: 'none',
     cursor: 'pointer',
   }
+
   const btnShadow =
     'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset'
+
   return (
     <>
-      <EditNoteModal
+      <Modal
+        type="edit"
+        button={{
+          styles: buttonStyles,
+          text: <Pencil />,
+        }}
         id={id}
-        buttonIcon={<Pencil />}
-        buttonStyles={buttonStyles}
       />
       <button type="button" style={buttonStyles} onClick={handleDelete}>
         <Trash />
       </button>
 
-      {/* delete confirm */}
+      {/* delete confirm dialog */}
       <Dialog
         open={open}
         onClose={handleClose}

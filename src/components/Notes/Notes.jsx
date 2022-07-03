@@ -27,7 +27,7 @@ const Notes = () => {
   }, [search, notes])
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 3 }}>
+    <Container maxWidth="lg" sx={{ mt: 3, mb: 3 }}>
       <Grid container spacing={3}>
         {filteredNotes.map((note) => (
           <Grid key={note.id} item xs={12} sm={6} md={4}>

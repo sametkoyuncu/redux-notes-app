@@ -2,14 +2,14 @@ import { useState } from 'react'
 
 // mui
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Backdrop from '@mui/material/Backdrop'
+import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 import Fade from '@mui/material/Fade'
 import Typography from '@mui/material/Typography'
 
 // noteapp components
-import AddNoteForm from '../Forms/AddNoteForm'
+import Form from '../Form/Form'
 
 const style = {
   position: 'absolute',
@@ -28,28 +28,15 @@ const style = {
 const btnShadow =
   'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset'
 
-export default function TransitionsModal() {
+const EditNoteModal = ({ type, button, id }) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
   return (
-    <div>
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor: '#22c55e',
-          borderRadius: 20,
-          boxShadow: btnShadow,
-          '&:hover': {
-            backgroundColor: '#16a34a',
-            boxShadow: 'none',
-          },
-        }}
-        disableElevation
-        onClick={handleOpen}
-      >
-        Add
+    <>
+      <Button sx={button.styles} onClick={handleOpen}>
+        {button.text}
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -65,12 +52,24 @@ export default function TransitionsModal() {
         <Fade in={open}>
           <Box sx={{ ...style }}>
             <Typography id="transition-modal-title" variant="h4" component="h2">
-              Add new note
+              {type === 'add' ? 'Add note' : 'Edit note'}
             </Typography>
-            <AddNoteForm setShowModal={setOpen} btnShadow={btnShadow} />
+            {type === 'add' && (
+              <Form type="add" setShowModal={setOpen} btnShadow={btnShadow} />
+            )}
+            {type === 'edit' && (
+              <Form
+                type="edit"
+                setShowModal={setOpen}
+                btnShadow={btnShadow}
+                id={id}
+              />
+            )}
           </Box>
         </Fade>
       </Modal>
-    </div>
+    </>
   )
 }
+
+export default EditNoteModal

@@ -39,6 +39,7 @@ function App() {
             fontSize: '1.2rem',
             fontWeight: 'bold',
             textAlign: 'center',
+            marginBottom: '1rem',
           }}
         >
           Samet Koyuncu
