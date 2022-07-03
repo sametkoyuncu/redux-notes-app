@@ -18,7 +18,7 @@ const Notes = () => {
   useEffect(() => {
     if (search) {
       const _notes = notes.filter((note) => {
-        return note.title.toLowerCase().includes(search)
+        return note.title.toLowerCase().includes(search.toLowerCase())
       })
       setFilteredNotes([..._notes])
     } else {
