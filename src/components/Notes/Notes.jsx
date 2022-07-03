@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 // mui
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import Masonry from '@mui/lab/Masonry'
 
 // notesapp components
 import Note from './Note'
@@ -28,13 +29,14 @@ const Notes = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 3, mb: 3 }}>
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}> */}
+      <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2}>
         {filteredNotes.map((note) => (
           <Grid key={note.id} item xs={12} sm={6} md={4}>
             <Note note={note} />
           </Grid>
         ))}
-      </Grid>
+      </Masonry>
     </Container>
   )
 }

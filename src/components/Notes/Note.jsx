@@ -27,7 +27,6 @@ export default function Note({ note }) {
       <Card
         sx={{
           minWidth: 275,
-          minHeight: 175,
           backgroundColor: colors[note.bgColor],
           display: 'flex',
           flexDirection: 'column',
