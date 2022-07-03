@@ -16,6 +16,12 @@ const Notes = () => {
   const notes = useSelector(selectNotes)
   const [filteredNotes, setFilteredNotes] = useState(notes)
 
+  const [width, setWidth] = useState(window.innerWidth)
+
+  window.addEventListener('resize', function (event) {
+    setWidth(window.innerWidth)
+  })
+
   useEffect(() => {
     if (search) {
       const _notes = notes.filter((note) => {
@@ -30,8 +36,9 @@ const Notes = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 3, mb: 3 }}>
       {/* <Grid container spacing={3}> */}
+      {/* columns={{ xs: 1, sm: 2, md: 3 }} --- works but its have some issue */}
       <Masonry
-        columns={{ xs: 1, sm: 2, md: 3 }}
+        columns={width > 900 ? 3 : width > 600 ? 2 : 1}
         defaultColumns={3}
         spacing={2}
         maxWidth="lg"
