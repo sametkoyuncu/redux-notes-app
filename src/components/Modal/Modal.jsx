@@ -9,8 +9,7 @@ import Fade from '@mui/material/Fade'
 import Typography from '@mui/material/Typography'
 
 // noteapp components
-import AddNoteForm from '../Forms/AddNoteForm'
-import EditNoteForm from '../Forms/EditNoteForm'
+import Form from '../Form/Form'
 
 const style = {
   position: 'absolute',
@@ -56,10 +55,11 @@ const EditNoteModal = ({ type, button, id }) => {
               {type === 'add' ? 'Add note' : 'Edit note'}
             </Typography>
             {type === 'add' && (
-              <AddNoteForm setShowModal={setOpen} btnShadow={btnShadow} />
+              <Form type="add" setShowModal={setOpen} btnShadow={btnShadow} />
             )}
             {type === 'edit' && (
-              <EditNoteForm
+              <Form
+                type="edit"
                 setShowModal={setOpen}
                 btnShadow={btnShadow}
                 id={id}

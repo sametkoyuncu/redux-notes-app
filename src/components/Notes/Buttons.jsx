@@ -8,7 +8,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogTitle from '@mui/material/DialogTitle'
 
-import Modal from '../Modals/Modal'
+import Modal from '../Modal/Modal'
 import { deleteNote } from '../../redux/notes/notesSlice'
 import Pencil from '../assets/icons/Pencil'
 import Trash from '../assets/icons/Trash'
