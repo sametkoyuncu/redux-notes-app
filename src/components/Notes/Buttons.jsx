@@ -60,7 +60,7 @@ const Buttons = ({ id }) => {
         }}
       >
         <DialogTitle id="alert-dialog-title" sx={{ p: 4, pb: 0 }}>
-          {'Are you sure delete this note?'}
+          {'Are you sure?'}
         </DialogTitle>
         <DialogActions sx={{ p: 2, pt: 0, pr: 3 }}>
           <Grid
