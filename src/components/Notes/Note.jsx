@@ -51,7 +51,7 @@ export default function Note({ note }) {
                   style={{ fontWeight: 'bold', cursor: 'pointer' }}
                   onClick={() => setOpen(true)}
                 >
-                  (devamını oku 👆)
+                  (read more 👆)
                 </span>
               </>
             )}
