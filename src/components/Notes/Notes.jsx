@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 // mui
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
-import Masonry from '@mui/lab/Masonry'
+// import Masonry from '@mui/lab/Masonry'
 
 // notesapp components
 import Note from './Note'
@@ -15,12 +15,6 @@ const Notes = () => {
   const search = useSelector(selectSearch)
   const notes = useSelector(selectNotes)
   const [filteredNotes, setFilteredNotes] = useState(notes)
-
-  const [width, setWidth] = useState(window.innerWidth)
-
-  window.addEventListener('resize', function (event) {
-    setWidth(window.innerWidth)
-  })
 
   useEffect(() => {
     if (search) {
@@ -37,18 +31,14 @@ const Notes = () => {
     <Container maxWidth="lg" sx={{ mt: 3, mb: 3 }}>
       {/* <Grid container spacing={3}> */}
       {/* columns={{ xs: 1, sm: 2, md: 3 }} --- works but its have some issue */}
-      <Masonry
-        columns={width > 900 ? 3 : width > 600 ? 2 : 1}
-        defaultColumns={3}
-        spacing={2}
-        maxWidth="lg"
-      >
+      {/* <Masonry columns={column} spacing={2}> */}
+      <Grid container spacing={3}>
         {filteredNotes.map((note) => (
           <Grid key={note.id} item xs={12} sm={6} md={4}>
             <Note note={note} />
           </Grid>
         ))}
-      </Masonry>
+      </Grid>
     </Container>
   )
 }
